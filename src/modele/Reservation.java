@@ -3,7 +3,7 @@ package modele;
 import main.FormulaireException;
 
 public class Reservation {
-	//Attributs 
+		//Attributs 
 		private String nom;
 		private String prenom;
 		private String mail;
@@ -12,16 +12,16 @@ public class Reservation {
 		
 		//Constructeur
 		public Reservation(String nom, String prenom, String mail, String concert, String place) {
-			this.nom=nom;
-			this.prenom=prenom;
-			this.mail=mail;
-			this.concert=concert;
-			this.place=place;
+			this.setNom(nom);
+			this.setPrenom(prenom);
+			this.setMail(mail);
+			this.setConcert(concert);
+			this.setPlace(place);
 		}
 		//Les méthodes
 		//Créer une méthode pour vérifier la validation des champs
 		public boolean champsValide() throws FormulaireException {
-			if (this.nom.equals("") || this.prenom.equals("") || this.mail.equals("")) {
+			if (this.getNom().equals("") || this.getPrenom().equals("") || this.getMail().equals("")) {
 				throw new FormulaireException();
 			} else {
 				return true;
