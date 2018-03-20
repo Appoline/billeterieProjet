@@ -13,8 +13,6 @@ public class Panneau extends JPanel {
 		try {
 			Image img = ImageIO.read(new File("concert.jpg"));
 			g.drawImage(img, 0, 0, 800, 550, this);
-			//Pour une image de fond
-			//g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}                

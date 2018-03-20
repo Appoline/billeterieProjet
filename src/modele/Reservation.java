@@ -1,6 +1,8 @@
 package modele;
 
 import main.FormulaireException;
+import java.awt.event.ActionEvent;
+import vue.Fenetre;
 
 public class Reservation {
 		//Attributs 
@@ -11,17 +13,19 @@ public class Reservation {
 		private String place;
 		
 		//Constructeur
-		public Reservation(String nom, String prenom, String mail, String concert, String place) {
-			this.setNom(nom);
-			this.setPrenom(prenom);
-			this.setMail(mail);
-			this.setConcert(concert);
-			this.setPlace(place);
+		public Reservation(Fenetre fen) {
+			this.setNom(fen.getNom());
+			this.setPrenom(fen.getPrenom());
+			this.setMail(fen.getMail());
+			this.setConcert(fen.getConcert());
+			this.setPlace(fen.getPlace());
 		}
 		//Les méthodes
 		//Créer une méthode pour vérifier la validation des champs
-		public boolean champsValide() throws FormulaireException {
+		public boolean champsValide(Fenetre fen) throws FormulaireException {
 			if (this.getNom().equals("") || this.getPrenom().equals("") || this.getMail().equals("")) {
+				fen.setVisible(false); //you can't see me!
+				fen.dispose();
 				throw new FormulaireException();
 			} else {
 				return true;

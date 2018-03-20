@@ -43,6 +43,13 @@ public class Fenetre extends JFrame implements ActionListener{
 		private JButton bouton = new JButton("Valider");
 	    private Box b10 =Box.createVerticalBox();
 		
+	    public Fenetre(String n, String p, String m, String c, String pl) {
+	    	this.setNom(n);
+	    	this.setPrenom(p);
+	    	this.setMail(m);
+	    	this.setConcert(c);
+	    	this.setPlace(pl);
+	    }
 		public Fenetre() {
 			//Paramètres de notre fenêtre : 
 			//Titre de la fenêtre:
@@ -67,13 +74,11 @@ public class Fenetre extends JFrame implements ActionListener{
 		    //Box 3 (prenom)    
 		    b3.add(prenom);
 		    b3.add(Box.createRigidArea(new Dimension(16,0)));
-		    //b3.createHorizontalGlue();
 		    b3.add(inp2);
 		    
 		    //Box 4 (mail)
 		    b4.add(mail);
 		    b4.add(Box.createRigidArea(new Dimension(38,0)));
-		    //b4.createHorizontalGlue();
 		    b4.add(inp3);
 		    
 		    //Box 5 choix concert
@@ -125,30 +130,18 @@ public class Fenetre extends JFrame implements ActionListener{
 		    this.setVisible(true);
 		    
 		    //On informe le bouton que cette fenêtre l'écoute
-		    bouton.addActionListener(new ActionListener()  {
-		    	public void actionPerformed(ActionEvent arg0) throws FormulaireException {
-		    		try {
-		    			Controleur controleur=new Controleur();
-		    			controleur.reserverPlace(inp1.getText(),inp2.getText(), inp3.getText(), liste.getSelectedItem().toString(), choixPlace.getSelection().getActionCommand());
-		    			inp1.setText(null);
-		    			inp2.setText(null);
-		    			inp3.setText(null);
-		    		} catch (Exception e) {
-		    			e.printStackTrace();
-		    		}	
-		    	}
-		    });
+		    bouton.addActionListener(this);
 		    
 		  }
-	/*//Les getter
+	//Les getter
 		public String getNom() {
-			return nom.getText();
+			return inp1.getText();
 		}
 		public String getPrenom() {
-			return prenom.getText();
+			return inp2.getText();
 		}
 		public String getMail() {
-			return mail.getText();
+			return inp3.getText();
 		}
 		public String getConcert() {
 			return liste.getSelectedItem().toString();
@@ -156,8 +149,35 @@ public class Fenetre extends JFrame implements ActionListener{
 		public String getPlace() {
 			return choixPlace.getSelection().getActionCommand();
 		}
-		*/
-		public void actionPerformed(ActionEvent arg0) {
-			
+		
+		//Les setter 
+		public void setNom(String nom) {
+			this.inp1.setText(nom);
 		}
+		public void setPrenom(String prenom) {
+			this.inp2.setText(prenom);
+		}
+		public void setMail(String mail) {
+			this.inp3.setText(mail);
+		}
+		public void setConcert(String concert) {
+			this.liste.setSelectedItem("Bigflo et Oli 12/04/2018");
+		}
+		/*public void setPlace(String place) {
+			this.choixPlace.setSelected(assise, true);
+		}*/
+		
+		//Méthode qui est automatiquement appelée quand on clique sur le bouton
+		public void actionPerformed(ActionEvent arg0) throws FormulaireException{
+			try {
+				Controleur controleur=new Controleur();
+				controleur.reserverPlace(this);
+				inp1.setText(null);
+				inp2.setText(null);
+				inp3.setText(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+
 }
